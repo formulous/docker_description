@@ -9,7 +9,9 @@
 * docker hub 에서 image 를 pull 해서 container 에서 run
 
 * `docker pull [image name]` : image install
+
 ** apache web server's image name : httpd
+
 ** `docker images` : install check
 
 * `docker run [OPTIONS] [Image Name]` : make container
