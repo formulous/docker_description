@@ -18,14 +18,14 @@ var docker = new Docker({socketPath: '/var/run/docker.sock'});
 var defaultDocker = new Docker();
 
 // option add (protocol defaults value: http)
-var optionAddDocker = new docker({host: 'HOST IP', port: 'PORT', protocol: 'https'});
+var optionAddDocker = new Docker({host: 'HOST IP', port: 'PORT', protocol: 'https'});
+
+var container = docker.getContainer('Container ID'); // docker에서 id에 해당하는 container를 가져온다.
 ```
 
 ### create api
 
 ```javascript
-var container = docker.getContainer('Container ID');
-
 docker.createContainer({
   Image: '이미지 이름',
   AttachStdin: 'true',  // stdin에 연결할 지 여부
@@ -57,4 +57,29 @@ docker.listContainers(function(err, containers) {
 container.start(function(err, data) {
   console.log(`err: ${err}, data: ${data}`);
 })
+```
+
+### stop container api
+
+```javascript
+container.stop(function(err, data) {
+   console.log(`err: ${err}, data: ${data}`);
+ })
+```
+
+### rm container api
+
+```javascript
+container.remove(function(err, data) {
+   console.log(`err: ${err}, data: ${data}`);
+ })
+```
+
+### get container's log api
+
+```javascript
+container.logs({follow: true , stdout : true , stderr : true },function(err, data) {
+   data.setEncoding('utf8')
+   data.on('data', info => console.log(info));
+ })
 ```
