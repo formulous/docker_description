@@ -37,3 +37,24 @@ docker.createContainer({
   StdinOnce: 'true'     // 연결된 클라이언트 중 하나의 연결이 끊긴 후 stdin을 닫음
 })
 ```
+
+### get container list api
+
+```javascript
+
+// 기동중인 Container의 data만 조회된다.
+docker.listContainers(function(err, containers) {
+  for (container of containers){
+    //container의 이름만 조회
+    console.log(container['Names']);
+  }
+})
+```
+
+### start container api
+
+```javascript
+container.start(function(err, data) {
+  console.log(`err: ${err}, data: ${data}`);
+})
+```
