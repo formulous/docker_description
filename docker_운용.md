@@ -23,22 +23,8 @@ Portainer를 기반으로 운용
 ## Portainer
 
 Docker Web UI 관리툴로 오픈소스로 배포되고 있어 무료로 사용이 가능하며, 쉘프롬프트에서 Docker 명령을 일일이 수행할 필요가 없이 Web UI 로 손쉽게 관리가능
-!picture921-1.png!
 
-#### 계정정보
-
-* ID/PW : root / xhdgkqroqkf2xla
-
-#### 접속정보
-
-* url : http://10.0.12.194:9000
-
-## 특이사항
-
-#### repository 구성
-
-* 10.0.35.10:5000, 10.0.35.10:5001
-* id/pw : dev2 / sniper<21>
+![image](https://user-images.githubusercontent.com/88424067/190940500-e829eb76-c05c-4e65-992d-5bf6063e15ef.png)
 
 #### Portainer 구성
 
