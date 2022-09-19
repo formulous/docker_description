@@ -1,10 +1,10 @@
-h1. 도커운용
+# 도커 운용
  
 Portainer를 기반으로 운용
 
-h2. 도커 구성
+## 도커 구성
 
-h4. 10.0.12.194
+#### 10.0.12.194
 
 메인 운용환경 + 개발환경
 
@@ -16,34 +16,35 @@ h4. 10.0.12.194
 
 * mariadb
 
-h4. 10.0.12.213
+#### 10.0.12.213
 
 서브 개발환경
 
-h2. Portainer
+## Portainer
 
 Docker Web UI 관리툴로 오픈소스로 배포되고 있어 무료로 사용이 가능하며, 쉘프롬프트에서 Docker 명령을 일일이 수행할 필요가 없이 Web UI 로 손쉽게 관리가능
 !picture921-1.png!
 
-h4. 계정정보
+#### 계정정보
 
 * ID/PW : root / xhdgkqroqkf2xla
 
-h4. 접속정보
+#### 접속정보
 
 * url : http://10.0.12.194:9000
 
-h2. 특이사항
+## 특이사항
 
-h4. repository 구성
+#### repository 구성
 
 * 10.0.35.10:5000, 10.0.35.10:5001
 * id/pw : dev2 / sniper<21>
 
-h4. Portainer 구성
+#### Portainer 구성
 
 * 2개의 entrypoint로 구성, 10.0.12.194(local), 10.0.12.213(docker api)
 * local entrypoint 구성간 selinux 비활성화 시켜야됨
+
 <pre>
 [root@gitlab ~]# setenforce 0
 [root@gitlab ~]# sestatus
@@ -57,27 +58,35 @@ Policy MLS status:              enabled
 Policy deny_unknown status:     allowed
 Max kernel policy version:      31
 </pre>
+
 * docker api는 docker service파일 옵션 수정, iptable 포트오픈, 방화벽오픈 작업 필요
-** service 파일 수정 <pre>
+** service 파일 수정 
+
+<pre>
 [root@localhost ~]# vi /etc/sysconfig/docker
 # /etc/sysconfig/docker
 
 # Modify these options if you want to change the way the docker daemon runs
-# 아래  -H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375 추가
 OPTIONS='--selinux-enabled --log-driver=journald --signature-verification=false -H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375'
 if [ -z "${DOCKER_CERT_PATH}" ]; then
     DOCKER_CERT_PATH=/etc/docker
 fi
 </pre>
+
 ** iptables 포트오픈
+
 <pre>
 iptables -I INPUT -i docker0 -j ACCEPT
 </pre>
+
 ** 방화벽 해제
+
 <pre>
 service firewalld stop
 </pre>
+
 ** 위 작업후 도커 서비스 restart
+
 <pre>
 [root@localhost ~]# netstat -tnlp
 Active Internet connections (only servers)
@@ -88,4 +97,5 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
 tcp6       0      0 ::1:25                  :::*                    LISTEN      1466/master
 tcp6       0      0 :::2375                 :::*                    LISTEN      13085/dockerd-curre    <-- 도커 api 포트확인
 </pre>
+
 ** portainer web ui에서 해당 서버 ip:port로 endpoint 추가
