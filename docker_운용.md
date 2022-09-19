@@ -73,19 +73,19 @@ if [ -z "${DOCKER_CERT_PATH}" ]; then
 fi
 </pre>
 
-** iptables 포트오픈
+* iptables 포트오픈
 
 <pre>
 iptables -I INPUT -i docker0 -j ACCEPT
 </pre>
 
-** 방화벽 해제
+* 방화벽 해제
 
 <pre>
 service firewalld stop
 </pre>
 
-** 위 작업후 도커 서비스 restart
+* 위 작업후 도커 서비스 restart
 
 <pre>
 [root@localhost ~]# netstat -tnlp
@@ -98,4 +98,4 @@ tcp6       0      0 ::1:25                  :::*                    LISTEN      
 tcp6       0      0 :::2375                 :::*                    LISTEN      13085/dockerd-curre    <-- 도커 api 포트확인
 </pre>
 
-** portainer web ui에서 해당 서버 ip:port로 endpoint 추가
+* portainer web ui에서 해당 서버 ip:port로 endpoint 추가
