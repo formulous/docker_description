@@ -62,7 +62,8 @@ docker.listContainers(function(err, containers) {
 ### start container api
 
 ```javascript
-container.start(function(err, data) {
+container.start().then(
+(err, data) => {
   console.log(`err: ${err}, data: ${data}`);
 })
 ```
@@ -70,17 +71,19 @@ container.start(function(err, data) {
 ### stop container api
 
 ```javascript
-container.stop(function(err, data) {
-   console.log(`err: ${err}, data: ${data}`);
- })
+container.stop().then(
+(err, data) => {
+  console.log(`err: ${err}, data: ${data}`);
+})
 ```
 
 ### rm container api
 
 ```javascript
-container.remove(function(err, data) {
-   console.log(`err: ${err}, data: ${data}`);
- })
+container.remove().then(
+(err, data) => {
+  console.log(`err: ${err}, data: ${data}`);
+})
 ```
 
 ### get container's log api
